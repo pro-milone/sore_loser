@@ -41,15 +41,21 @@ def word_search_page():
 
             if found_words:
                 st.success(f"Found {len(found_words)} words!")
-                max_len = max(len(w) for w in found_words)
-                min_len = min(len(w) for w in found_words)
-                for i in range(min_len, max_len + 1):
-                    words_of_len = [w for w in found_words if len(w) == i]
-                    if words_of_len:
-                        st.write(f"**{i} LETTER WORDS ({len(words_of_len)})**")
-                        st.write(words_of_len)
+            
+                # Determine grid size (number of columns)
+                cols_count = 4  # you can adjust the number of columns
+                words_sorted = sorted(found_words)
+            
+                # Split words into rows of length cols_count
+                rows = [words_sorted[i:i + cols_count] for i in range(0, len(words_sorted), cols_count)]
+            
+                for row in rows:
+                    cols = st.columns(cols_count)
+                    for col, word in zip(cols, row):
+                        col.markdown(f"**{word}**")
             else:
                 st.info("No words found.")
+
 
 # --------------------------
 # Other Tool Page (Placeholder)
