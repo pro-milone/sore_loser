@@ -42,19 +42,27 @@ def word_search_page():
             if found_words:
                 st.success(f"Found {len(found_words)} words!")
             
-                # Determine grid size (number of columns)
-                cols_count = 4  # you can adjust the number of columns
-                words_sorted = sorted(found_words)
+                # Group words by length
+                length_to_words = {}
+                for word in found_words:
+                    length_to_words.setdefault(len(word), []).append(word)
             
-                # Split words into rows of length cols_count
-                rows = [words_sorted[i:i + cols_count] for i in range(0, len(words_sorted), cols_count)]
+                # Sort lengths ascending
+                for length in sorted(length_to_words.keys()):
+                    words_of_len = sorted(length_to_words[length])
+                    st.subheader(f"{length} LETTER WORDS ({len(words_of_len)})")
             
-                for row in rows:
-                    cols = st.columns(cols_count)
-                    for col, word in zip(cols, row):
-                        col.markdown(f"**{word}**")
+                    # Display in grid
+                    cols_count = 4  # adjust number of columns per row
+                    rows = [words_of_len[i:i + cols_count] for i in range(0, len(words_of_len), cols_count)]
+            
+                    for row in rows:
+                        cols = st.columns(cols_count)
+                        for col, word in zip(cols, row):
+                            col.markdown(f"**{word}**")
             else:
                 st.info("No words found.")
+
 
 
 # --------------------------
