@@ -53,7 +53,7 @@ def word_search_page():
                     st.subheader(f"{length} LETTER WORDS ({len(words_of_len)})")
             
                     # Display in grid
-                    cols_count = 4  # adjust number of columns per row
+                    cols_count = 6  # adjust number of columns per row
                     rows = [words_of_len[i:i + cols_count] for i in range(0, len(words_of_len), cols_count)]
             
                     for row in rows:
