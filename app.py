@@ -50,7 +50,7 @@ def word_search_page():
                 # Sort lengths ascending
                 for length in sorted(length_to_words.keys()):
                     words_of_len = sorted(length_to_words[length])
-                    st.subheader(f"{length} letter words ({len(words_of_len)})")
+                    st.subheader(f"{length} LETTER WORDS ({len(words_of_len)})")
             
                     # Display in grid
                     cols_count = 6  # adjust number of columns per row
